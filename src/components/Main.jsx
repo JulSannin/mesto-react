@@ -17,7 +17,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 setUserDescription(res.about);
                 setUserAvatar(res.avatar);
             })
-            .catch((err) => console.log(err));
+            .catch(console.error);
     }, []);
 
     React.useEffect(() => {
@@ -26,7 +26,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
             .then((res) => {
                 setCards([...res]);
             })
-            .catch((err) => console.log(err));
+            .catch(console.error);
     }, []);
 
     return (

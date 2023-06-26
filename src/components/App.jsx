@@ -47,6 +47,7 @@ function App() {
       <PopupWithForm
         name="editing-profile"
         title="Редактировать профиль"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         children={
@@ -58,15 +59,13 @@ function App() {
               name="description" placeholder="Профессия автора" defaultValue="" minLength="2" maxLength="200"
               required="" />
             <span id="popup__input-description-error" className="popup__error" />
-            <button className="popup__button-saved" type="submit" disabled="">
-              Сохранить
-            </button>
           </>
         }
       />
       <PopupWithForm
         name="adding-card"
         title="Новое место"
+        buttonText="Создать"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         children={
@@ -77,9 +76,6 @@ function App() {
             <input id="popup__input-link-img" className="popup__input popup__input_type_link-img" type="url"
               name="linkImg" defaultValue="" placeholder="Ссылка на картинку" required="" />
             <span id="popup__input-link-img-error" className="popup__error" />
-            <button className="popup__button-saved" type="submit">
-              Создать
-            </button>
           </>
         }
       />
@@ -91,6 +87,7 @@ function App() {
       <PopupWithForm
         name="editing-avatar"
         title="Обновить аватар"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         children={
@@ -98,9 +95,6 @@ function App() {
             <input id="popup__input-link-avatar" className="popup__input popup__input_type_link-avatar" type="url"
               name="linkAvatar" defaultValue="" placeholder="Ссылка на картинку" required="" />
             <span id="popup__input-link-avatar-error" className="popup__error" />
-            <button className="popup__button-saved" type="submit">
-              Сохранить
-            </button>
           </>
         }
       />
