@@ -1,33 +1,10 @@
 import React from 'react';
-import { api } from "../utils/Api";
 import Card from "./Card";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, onCardDelete}) {
 
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
-    const [cards, setCards] = React.useState([]);
-
-    React.useEffect(() => {
-        api
-            .getUser()
-            .then((res) => {
-                setUserName(res.name);
-                setUserDescription(res.about);
-                setUserAvatar(res.avatar);
-            })
-            .catch(console.error);
-    }, []);
-
-    React.useEffect(() => {
-        api
-            .getInitialCards()
-            .then((res) => {
-                setCards([...res]);
-            })
-            .catch(console.error);
-    }, []);
+    const currentUser = React.useContext(CurrentUserContext);
 
     return (
         <main className="content">
@@ -35,7 +12,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 <div className="profile__avatar">
                     <img
                         className="profile__avatar-image"
-                        src={userAvatar}
+                        src={currentUser.avatar}
                         title="Фото профиля"
                         alt="Фото профиля"
                     />
@@ -52,8 +29,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 </div>
                 <div className="profile__info">
                     <div className="profile__description">
-                        <h1 className="profile__author">{userName}</h1>
-                        <p className="profile__competention">{userDescription}</p>
+                        <h1 className="profile__author">{currentUser.name}</h1>
+                        <p className="profile__competention">{currentUser.about}</p>
                     </div>
                     <button
                         className="profile__edit-button"
@@ -75,8 +52,12 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                         name={item.name}
                         link={item.link}
                         likes={[...item.likes]}
-                        onCardClick={onCardClick}
                         key={item._id}
+                        _id={item._id}
+                        owner={item.owner}
+                        onCardClick={onCardClick}
+                        onCardLike={onCardLike}
+                        onCardDelete={onCardDelete}
                     />
                 ))}
             </section>
